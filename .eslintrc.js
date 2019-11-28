@@ -13,17 +13,9 @@ module.exports = {
     }
   },
   extends: ["airbnb"],
-  // globals: {
-  //   Atomics: "readonly",
-  //   SharedArrayBuffer: "readonly"
-  // },
-  // parserOptions: {
-  //   ecmaFeatures: {
-  //     jsx: true
-  //   },
-  //   ecmaVersion: 2018,
-  //   sourceType: "module"
-  // },
   plugins: ["react-hooks"],
-  rules: {}
+  rules: {
+    'react/jsx-props-no-spreading': ['off'],
+    'no-alert': ['off']
+  }
 };

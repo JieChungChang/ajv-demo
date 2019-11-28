@@ -5,10 +5,6 @@ dist
 styleguide
 storybook
 
-src/server/public
-src/server/app.js
-src/component/components/input.jsx
-src/component/components/Button.jsx
 src/model
 
 !.storybook

@@ -30,10 +30,10 @@ const SignUp = ({ baseUrl }) => {
     return isValid;
   };
 
-  const validateSingle = (target) => {
+  const validateSingle = (target, value) => {
     let isValid = false;
     try {
-      isValid = validateForSignUp(inputs);
+      isValid = validateForSignUp({ ...inputs, [target]: value });
       if (isValid) setInvalids({});
     } catch (error) {
       setInvalids(normalizeSingleError(error, invalids, target));

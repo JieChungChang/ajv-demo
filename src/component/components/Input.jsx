@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import PropTypes from "prop-types";
-import styled, { css } from "styled-components";
-import Label from "./Label";
-import Message from "./Message";
+import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import styled, { css } from 'styled-components';
+import Label from './Label';
+import Message from './Message';
 
 const StyledInput = styled.input`
   box-sizing: border-box;
@@ -15,17 +15,16 @@ const StyledInput = styled.input`
   font-size: 1rem;
   appearance: none;
 
-  ${({ invalid }) =>
-    invalid
-      ? css`
+  ${({ invalid }) => (invalid
+    ? css`
           border: 1px solid red;
           color: red;
         `
-      : css`
+    : css`
           &:focus {
             border-color: #9654ff;
           }
-        `}
+        `)}
 
   &:disabled {
     opacity: 1;
@@ -47,19 +46,17 @@ const TextInput = ({
 }) => {
   const [validateByKeyUp, setValidateByKeyUp] = useState(false);
 
-  const handleBlur = e => {
-    const { name } = e.currentTarget;
+  const handleBlur = (e) => {
+    const { name, value } = e.currentTarget;
     if (validateByKeyUp) return;
-    console.log("blur");
-    validate(name);
+    validate(name, value);
     setValidateByKeyUp(true);
   };
 
-  const handleKeyUp = e => {
-    const { name } = e.currentTarget;
+  const handleKeyUp = (e) => {
+    const { name, value } = e.currentTarget;
     if (!validateByKeyUp) return;
-    console.log("keyup");
-    validate(name);
+    validate(name, value);
   };
 
   useEffect(() => {
@@ -67,7 +64,7 @@ const TextInput = ({
   }, [hasSubmit]);
 
   return (
-    <div style={{ marginBottom: "0.875rem" }}>
+    <div style={{ marginBottom: '0.875rem' }}>
       <Label id={id}>{label}</Label>
       <StyledInput
         type={type}
@@ -92,10 +89,10 @@ TextInput.propTypes = {
   invalid: PropTypes.bool,
   disabled: PropTypes.bool,
   validate: PropTypes.func,
-  hasSubmit: PropTypes.bool
+  hasSubmit: PropTypes.bool,
 };
 TextInput.defaultProps = {
-  type: "text",
+  type: 'text',
   id: undefined,
   label: undefined,
   focused: undefined,
@@ -103,7 +100,7 @@ TextInput.defaultProps = {
   invalid: undefined,
   disabled: false,
   hasSubmit: false,
-  validate: () => {}
+  validate: () => {},
 };
 
 export default TextInput;

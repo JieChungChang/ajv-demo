@@ -10,7 +10,7 @@
         "gender": { "$ref": "common.json#/definitions/gender" },
         "address": { "$ref": "common.json#/definitions/address" }
       },
-      "required": ["name", "mobile", "gender", "address"],
+      "required": ["name", "mobile", "gender"],
       "errorMessage": {
         "required": "This field is required"
       }

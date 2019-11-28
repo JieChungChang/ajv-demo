@@ -20,20 +20,22 @@ export const ajv = new Ajv({
 
 addAjvErrors(ajv);
 
-const sortErrorsByKey = errors => {
-  let result = {};
-  errors.forEach(error => {
-    const { keyword, dataPath, params, message } = error;
+const sortErrorsByKey = (errors) => {
+  const result = {};
+  errors.forEach((error) => {
+    const {
+      keyword, dataPath, params, message,
+    } = error;
     if (dataPath) {
       pointer.set(result, dataPath, error);
-    } else if (keyword === "required") {
+    } else if (keyword === 'required') {
       result[params.missingProperty] = error;
     }
-    if (keyword === "errorMessage" && !dataPath) {
-      params.errors.forEach(oriError => {
+    if (keyword === 'errorMessage' && !dataPath) {
+      params.errors.forEach((oriError) => {
         result[oriError.params.missingProperty] = {
           ...error,
-          keyword: oriError.keyword
+          keyword: oriError.keyword,
         };
       });
     }
@@ -41,26 +43,25 @@ const sortErrorsByKey = errors => {
   return result;
 };
 
-const getMessageFromErrors = errors => {
+const getMessageFromErrors = (errors) => {
   let messages = {};
-  for (let key in errors) {
+  for (const key in errors) {
     messages = { ...messages, [key]: errors[key].message };
   }
   return messages;
 };
 
 export function normalizeSingleError(errors = [], prevErrors, currentTarget) {
-
-  let errorMessages = {};
+  const errorMessages = {};
   const currentErrors = sortErrorsByKey(errors);
   const currentErrorKeys = Object.keys(currentErrors);
   const prevErrorKeys = Object.keys(prevErrors);
 
-  currentErrorKeys.forEach(el => {
+  currentErrorKeys.forEach((el) => {
     if (
-      prevErrorKeys.indexOf(el) === -1 &&
-      el !== currentTarget &&
-      currentErrors[el].keyword === "required"
+      prevErrorKeys.indexOf(el) === -1
+      && el !== currentTarget
+      && currentErrors[el].keyword === 'required'
     ) {
       delete currentErrors[el];
     }

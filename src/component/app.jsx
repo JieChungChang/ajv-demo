@@ -1,16 +1,11 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-// import { validateForUser, validateForUserItem } from 'model/user';
-// import {
-//   normalizeAllErrors,
-//   normalizeSingleError,
-//   // normalizeErrors,
-// } from 'model/validator';
-// import axios from 'axios';
-
 import SignUp from './scene/SignUp';
 import EditProfile from './scene/EditProfile';
 
+const PageWrap = styled.div`
+  font-family: PingFangSC-Regular, sans-serif;
+`;
 const NavButton = styled.div`
   position: relative;
   margin: 0 1rem;
@@ -24,7 +19,7 @@ const NavButton = styled.div`
     z-index: 2;
     top: 40px;
     left: 0;
-    width: 0;
+    width: ${({ active }) => (active ? '100%' : 0)};
     height: 1px;
     transition: 0.1s ease-in;
     background-color: white;
@@ -48,7 +43,7 @@ const NavBar = styled.div`
   background-color: black;
 `;
 
-const Conatiner = styled.div`
+const Content = styled.div`
   display: flex;
   justify-content: center;
   width: 100%;
@@ -68,19 +63,23 @@ const Appcomponent = () => {
 
   const handleNavClick = () => setShowSignUp(!showSignUp);
   return (
-    <>
+    <PageWrap>
       <NavBar>
-        <NavButton onClick={handleNavClick}>Sign Up</NavButton>
-        <NavButton onClick={handleNavClick}>Edit Profile</NavButton>
+        <NavButton onClick={handleNavClick} active={showSignUp}>
+          Sign Up
+        </NavButton>
+        <NavButton onClick={handleNavClick} active={!showSignUp}>
+          Edit Profile
+        </NavButton>
       </NavBar>
-      <Conatiner>
+      <Content>
         {showSignUp ? (
           <SignUp baseUrl={baseUrl} />
         ) : (
           <EditProfile baseUrl={baseUrl} />
         )}
-      </Conatiner>
-    </>
+      </Content>
+    </PageWrap>
   );
 };
 

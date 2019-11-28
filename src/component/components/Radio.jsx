@@ -11,31 +11,35 @@ const Label = styled.span`
   font-size: 0.875rem;
 `;
 
-const Radio = ({ value, onChange, validate }) => {
+const Radio = ({
+  val, onChange, validate, ...props
+}) => {
   const handleOnChange = (e) => {
+    const { name, value } = e.currentTarget;
     onChange(e);
-    validate(e.target.value, e.target.name);
+    validate(name, value);
   };
   return (
     <Container>
       <input
         name="gender"
         type="radio"
-        value={value}
+        value={val}
         onChange={handleOnChange}
+        {...props}
       />
-      <Label>{value}</Label>
+      <Label>{val}</Label>
     </Container>
   );
 };
 
 Radio.propTypes = {
-  value: PropTypes.string,
+  val: PropTypes.string,
   onChange: PropTypes.func,
   validate: PropTypes.func,
 };
 Radio.defaultProps = {
-  value: undefined,
+  val: undefined,
   onChange: () => {},
   validate: () => {},
 };

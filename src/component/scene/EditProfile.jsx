@@ -33,10 +33,10 @@ const EditProfile = ({ baseUrl }) => {
     return isValid;
   };
 
-  const validateSingle = (target) => {
+  const validateSingle = (target, value) => {
     let isValid = false;
     try {
-      isValid = validateForEditProfile(inputs);
+      isValid = validateForEditProfile({ ...inputs, [target]: value });
       if (isValid) setInvalids({});
     } catch (error) {
       setInvalids(normalizeSingleError(error, invalids, target));
@@ -91,25 +91,34 @@ const EditProfile = ({ baseUrl }) => {
         <Label id="gender">Gender</Label>
         <div style={{ display: 'flex', flexWrap: 'wrap' }}>
           <Radio
-            value="Gay"
+            val="Gay"
             onChange={handleOnChange}
             validate={validateSingle}
+            checked={inputs.gender === 'Gay'}
           />
           <Radio
-            value="Bisexual"
+            val="Bisexual"
             onChange={handleOnChange}
             validate={validateSingle}
+            checked={inputs.gender === 'Bisexual'}
           />
           <Radio
-            value="Transgender"
+            val="Transgender"
             onChange={handleOnChange}
             validate={validateSingle}
+            checked={inputs.gender === 'Transgender'}
           />
-          <Radio value="Queer" onChange={handleOnChange} />
           <Radio
-            value="Lesbian"
+            val="Queer"
             onChange={handleOnChange}
             validate={validateSingle}
+            checked={inputs.gender === 'Queer'}
+          />
+          <Radio
+            val="Lesbian"
+            onChange={handleOnChange}
+            validate={validateSingle}
+            checked={inputs.gender === 'Lesbian'}
           />
         </div>
         <Message message={invalids.gender} />
