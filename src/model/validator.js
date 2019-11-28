@@ -2,8 +2,9 @@ import Ajv from "ajv";
 import addAjvErrors from "ajv-errors";
 import pointer from "json-pointer";
 import CommonSchema from "./schema/common.json";
-import SignUpSchema from "./schema/SignUp.json";
-import EditProfileSchema from "./schema/EditProfile.json";
+import SignUpSchema from "./schema/signUp.json";
+import SuperSignUpSchema from "./schema/superSignUp.json";
+import EditProfileSchema from "./schema/editProfile.json";
 
 export const ajv = new Ajv({
   $data: true,
@@ -12,6 +13,7 @@ export const ajv = new Ajv({
   schemas: {
     Common: CommonSchema,
     SignUp: SignUpSchema,
+    SuperSignUp: SuperSignUpSchema,
     EditProfile: EditProfileSchema
   }
 });

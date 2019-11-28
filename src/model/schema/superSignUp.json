@@ -1,0 +1,22 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema",
+  "$id": "http://ajv-demo/superSignUp.json",
+
+  "definitions": {
+    "ForSuperSignUp": {
+      "allOf": [
+        { "$ref": "signUp.json#/definitions/ForSignUp" },
+        {
+          "type": "object",
+          "properties": {
+            "mobile": { "$ref": "common.json#/definitions/mobile" }
+          },
+          "required": ["mobile"],
+          "errorMessage": {
+            "required": "This field is required"
+          }
+        }
+      ]
+    }
+  }
+}
